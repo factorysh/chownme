@@ -8,3 +8,7 @@ server: bin
 
 bin:
 	mkdir -p bin
+
+upx: build
+	upx bin/chow*
+

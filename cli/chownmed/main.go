@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"strings"
 	"syscall"
+	"time"
 
 	"github.com/athoune/credrpc/server"
 )
@@ -42,6 +43,9 @@ func main() {
 }
 
 func chownme(path string, u *server.Cred) error {
+	chrono := time.Now()
+	defer log.Printf("Done for [%d] %s : %v", u.Uid, path, time.Since(chrono))
+
 	log.Printf("User %d Group %d Process %d", u.Uid, u.Gid, u.Pid)
 	if u.Uid == 0 {
 		return errors.New("do not use with root user")

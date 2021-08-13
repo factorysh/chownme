@@ -10,6 +10,7 @@ import (
 	_user "os/user"
 	"path/filepath"
 	"strings"
+	"syscall"
 
 	"github.com/athoune/credrpc/server"
 )
@@ -41,6 +42,7 @@ func main() {
 }
 
 func chownme(path string, u *server.Cred) error {
+	log.Printf("User %d Group %d Process %d", u.Uid, u.Gid, u.Pid)
 	if u.Uid == 0 {
 		return errors.New("do not use with root user")
 	}
@@ -69,8 +71,17 @@ func chownme(path string, u *server.Cred) error {
 		return fmt.Errorf("path not in home of %s : %s", user.Name, path)
 	}
 
+	log.Printf("Chown folder [%d] %s", u.Uid, path)
 	err = filepath.Walk(path, func(path string, info fs.FileInfo, err error) error {
-		return os.Chown(path, int(u.Uid), -1) // just uid, not groupid
+		mode := info.Mode()
+		if mode&fs.ModeType == 0 || mode.IsDir() {
+			stat := info.Sys().(*syscall.Stat_t)
+			if stat.Uid != u.Uid {
+				log.Printf("Chown [%d] %s", u.Uid, path)
+				return os.Chown(path, int(u.Uid), -1) // just uid, not groupid
+			}
+		}
+		return nil
 	})
 	if err != nil {
 		return err // chown error

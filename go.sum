@@ -1,7 +1,6 @@
-github.com/athoune/credrpc v0.0.0-20210812181633-a2d94947bed5 h1:b6J5B+BoBub6IH/PLMFQEE6vbV9m6MFR0uXd/vaC1OQ=
-github.com/athoune/credrpc v0.0.0-20210812181633-a2d94947bed5/go.mod h1:rKOz0T0wy1eaeZY91kwqiTD9hdExmRey/ESz7SndXV8=
-github.com/athoune/credrpc v0.2.0 h1:KT7uOef1tSP9+4Knk5HtC4m+hAwpL5V6lWZmvJZqcsg=
-github.com/athoune/credrpc v0.2.0/go.mod h1:083D/xVH/AAqti//FrKzIY7XvjoWQcXpPSiDoR9GP8w=
+github.com/athoune/credrpc v0.3.0 h1:a/PcD20kfnQZEtGPOwO36tZ+LeTPEk0Ol8kimxSKdAc=
+github.com/athoune/credrpc v0.3.0/go.mod h1:083D/xVH/AAqti//FrKzIY7XvjoWQcXpPSiDoR9GP8w=
+github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf h1:iW4rZ826su+pqaw19uhpSCzhj44qo35pNgKFGqzDKkU=
 github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf/go.mod h1:F5haX7vjVVG0kc13fIWeqUViNPyEJxv/OmvnBo0Yme4=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

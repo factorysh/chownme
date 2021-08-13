@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/fs"
 	"log"
+	"net"
 	"os"
 	_user "os/user"
 	"path/filepath"
@@ -14,18 +15,26 @@ import (
 )
 
 func main() {
-	listen := os.Getenv("LISTEN")
-	if listen == "" {
-		listen = "/var/run/chownme/socket"
+	listener, err := server.ActivationListener()
+	if err != nil {
+		log.Fatal(err)
+	}
+	if listener == nil {
+		listen := os.Getenv("LISTEN")
+		if listen == "" {
+			listen = "/var/run/chownme/socket"
+		}
+		listener, err = net.Listen("unix", listen)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	s := server.NewServer(func(i []byte, u *server.Cred) ([]byte, error) {
-		err := chownme(string(i), u)
-		return []byte{}, err
+		return []byte{}, chownme(string(i), u)
 	})
 
-	err := s.ListenAndServe(listen)
-
+	err = s.Serve(listener)
 	if err != nil {
 		log.Fatal(err)
 	}
